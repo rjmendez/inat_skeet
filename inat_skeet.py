@@ -8,10 +8,10 @@ from PIL import Image
 
 # Settings
 per_page = 1
-user_id = os.environ['INAT_ID']
-user_id_num = os.environ['INAT_ID_NUMBER']
-my_handle = os.environ['BSKY_HANDLE']
-my_password = os.environ['BSKY_PASSWORD']
+user_id = os.getenv('INAT_ID')
+user_id_num = os.getenv('INAT_ID_NUMBER')
+my_handle = os.getenv('BSKY_HANDLE')
+my_password = os.getenv('BSKY_PASSWORD')
 
 # Get number of observations for pagination
 num_obs = get_user_by_id(user_id_num)
