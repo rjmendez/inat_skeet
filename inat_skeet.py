@@ -39,7 +39,7 @@ def main() -> None:
                 images.append(f.read())
 
     client.send_images(
-        text=client_utils.TextBuilder().text(fullname+'\n\n'+observed_on+'\n'+place_guess+'\n').link(uri, uri),
+        text=client_utils.TextBuilder().text(fullname+'\n\n'+observed_on+'\n'+place_guess+'\n'+'This is an automated post!\n').link(uri, uri),
         images=images,
     )
 
