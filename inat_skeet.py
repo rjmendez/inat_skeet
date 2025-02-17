@@ -29,7 +29,6 @@ def main() -> None:
 
     images = []
     for path in paths:
-        print(os.path.getsize(path))
         if os.path.getsize(path) >= 1000000: # This might be wrong! bsky limits file upload sizes.
             path = recompress_image(path)
             with open(path, 'rb') as f:
@@ -73,7 +72,6 @@ def download_images():
 
 def recompress_image(filepath):
     picture = Image.open(filepath) 
-    print(filepath)
     # Save the picture with desired quality 
     # To change the quality of image, 
     # set the quality variable at 
