@@ -25,7 +25,6 @@ def resize_images(paths):
     if os.path.getsize(path) >= 750000: # This might be wrong! bsky limits file upload sizes.
         path = recompress_image(path)
         return(path)
-        #images.append(path)
     else:
         images.append(path)
         return(path)
