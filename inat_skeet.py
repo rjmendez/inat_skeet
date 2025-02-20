@@ -22,7 +22,7 @@ def main() -> None:
 def resize_images(paths):
     images = []
     path = paths
-    if os.path.getsize(path) >= 750000: # This might be wrong! bsky limits file upload sizes.
+    if os.path.getsize(path) >= 900000: # This might be wrong! bsky limits file upload sizes.
         path = recompress_image(path)
         return(path)
     else:
@@ -139,7 +139,7 @@ def recompress_image(filepath):
     picture.save(new_filename,  
                  optimize = True, 
                  subsampling=0, 
-                 quality = 85) 
+                 quality = 75) 
     return(new_filename)
 
 
