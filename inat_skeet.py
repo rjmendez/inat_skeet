@@ -13,7 +13,7 @@ user_id_num = os.getenv('INAT_ID_NUMBER')
 my_handle = os.getenv('BSKY_HANDLE')
 my_password = os.getenv('BSKY_PASSWORD')
 
-prompt = "Please provide a thoroughly detailed description of this image. This image contains the organism "
+prompt = "Please provide a thoroughly detailed description of this image. This image probably contains the organism "
 
 # Get number of observations for pagination
 num_obs = get_user_by_id(user_id_num)
