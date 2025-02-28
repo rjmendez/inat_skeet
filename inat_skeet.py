@@ -5,6 +5,7 @@ from atproto import Client, client_utils, models
 import os
 from PIL import Image
 import image_understanding_lib as glib
+import sys
 
 # Settings
 per_page = 1
@@ -12,6 +13,10 @@ user_id = os.getenv('INAT_ID')
 user_id_num = os.getenv('INAT_ID_NUMBER')
 my_handle = os.getenv('BSKY_HANDLE')
 my_password = os.getenv('BSKY_PASSWORD')
+try:
+    obs_id = sys.argv[1]
+except:
+    pass
 
 prompt = "Please provide an extemely brief visual description of this image. This image contains an organism named "
 
@@ -85,10 +90,13 @@ def getobs(user_id, per_page):
         page = randrange(0, int(num_obs['observations_count']/per_page))
         observations = get_observations(user_id=user_id, page=page, per_page=per_page)
         my_observations = Observation.from_json_list(observations)
-        # Lets pull single observations by ID
+        # Lets pull all observations in this page
         inat_ids = []
-        for inat_id in my_observations:
-            inat_ids.append(inat_id.id)
+        try:
+            inat_ids.append(obs_id)
+        except:
+            for inat_id in my_observations:
+                inat_ids.append(inat_id.id)
         return(inat_ids)
 
 def obs_details():
@@ -132,13 +140,16 @@ def download_images(id, photo_urls):
     photo_names = []
     observation = id
     for img_url in photo_urls:
-        data = requests.get(img_url).content
-        filename = str(id)+str('_'+str(img_index))+'.jpg'
-        img_index = img_index+1
-        f = open(filename,'wb')
-        f.write(data)
-        f.close()
-        photo_names.append(filename)
+        if img_index <= 3: # Limit images to 4
+            data = requests.get(img_url).content
+            filename = str(id)+str('_'+str(img_index))+'.jpg'
+            img_index = img_index+1
+            f = open(filename,'wb')
+            f.write(data)
+            f.close()
+            photo_names.append(filename)
+        else:
+            pass
     paths = []
     for path in photo_names:
         paths.append(resize_images(path))
